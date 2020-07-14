@@ -1,0 +1,25 @@
+name: Run
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      os: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+      - name: Set up Python ${{ matrix.python-version }}
+        run: |
+          wget https://www.dropbox.com/s/zrrgg9mdtos26c4/portable-python-384-with-ssl.zip
+          unzip portable-python-384-with-ssl.zip
+          whereis openssl
+          sudo apt-get remove --auto-remove openssl
+      - name: Install dependencies
+        run: |
+          portable-python-384-with-ssl/bin/python -m pip install --upgrade pip
+          portable-python-384-with-ssl/bin/python -m venv penv
+          penv/bin/pip install platformio
+          penv/bin/platformio boards
