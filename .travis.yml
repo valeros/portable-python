@@ -9,7 +9,10 @@ install:
   - wget https://www.dropbox.com/s/zmkkab2xfgjy3iq/portable-python-384-with-ssl-disable-shared-static-libs.zip
   - unzip portable-python-384-with-ssl-disable-shared-static-libs
   - whereis openssl
-  - sudo apt-get remove --auto-remove openssl
+  - brew uninstall --ignore-dependencies openssl
+  - rm -rf /usr/local/etc/openssl*
+  - /usr/bin/openssl version -a
+  - brew list
 
 script:
   - portable-python-384-with-ssl-disable-shared-static-libs/bin/python3 -m pip install --upgrade pip
