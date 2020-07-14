@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         run: |
           wget https://www.dropbox.com/s/zmkkab2xfgjy3iq/portable-python-384-with-ssl-disable-shared-static-libs.zip
-          unzip portable-python-384-with-ssl.zip
+          unzip portable-python-384-with-ssl-disable-shared-static-libs
           whereis openssl
           sudo apt-get remove --auto-remove openssl
       - name: Install dependencies
